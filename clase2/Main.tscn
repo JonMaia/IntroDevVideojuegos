@@ -1,14 +1,14 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/resources/background.png" type="Texture" id=1]
+[ext_resource path="res://assets/images/background.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
-[ext_resource path="res://assets/resources/player.png" type="Texture" id=3]
-[ext_resource path="res://assets/resources/floor.png" type="Texture" id=4]
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 27.3705, 27.4097 )
+[ext_resource path="res://assets/images/player.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/floor.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 27.3705, 27.4097 )
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 31.9666, 28.5667 )
 
 [node name="Main" type="Node"]
@@ -37,7 +37,7 @@ mode = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/KinematicBody2D"]
 position = Vector2( 0.311707, -0.311829 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Ground" type="Sprite" parent="."]
 position = Vector2( 515.506, 383.567 )
@@ -49,4 +49,4 @@ mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/RigidBody2D"]
 position = Vector2( 0, 1 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
