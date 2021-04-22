@@ -1,0 +1,67 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://assets/sprites/spritess-7.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/spritess-8.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/spritess-3.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/spritess-6.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/spritess-5.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/spritess-0.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/spritess-15.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/spritess-9.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/spritess-14.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/spritess-2.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/spritess-12.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/spritess-1.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/spritess-11.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/spritess-4.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/spritess-13.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/spritess-10.png" type="Texture" id=16]
+[ext_resource path="res://src/Player.gd" type="Script" id=17]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 14 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 16 ), ExtResource( 8 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 15 ), ExtResource( 9 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "down",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 11.5577
+height = 7.37304
+
+[node name="Player" type="Area2D"]
+position = Vector2( 1.6582, -10.5021 )
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.840897, 14.9088 )
+shape = SubResource( 2 )
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
