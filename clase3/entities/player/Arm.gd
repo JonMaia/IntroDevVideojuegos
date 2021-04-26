@@ -1,9 +1,7 @@
 extends Sprite
 
 onready var fire_position = $FirePosition
-
 export (PackedScene) var projectile_scene: PackedScene
-
 var container:Node
 
 func fire():
