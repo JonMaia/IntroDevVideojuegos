@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/textures/background.png" type="Texture" id=2]
-[ext_resource path="res://assets/textures/floor.png" type="Texture" id=3]
+[ext_resource path="res://Ground.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Main.gd" type="Script" id=4]
+[ext_resource path="res://entities/player/Turret.tscn" type="PackedScene" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 4 )
@@ -17,43 +18,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Floor" type="TextureRect" parent="."]
-anchor_top = 0.699
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 3 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Floor2" type="TextureRect" parent="."]
-anchor_top = 0.699
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 46.0362
-margin_top = -131.45
-margin_right = -678.964
-margin_bottom = -275.05
-texture = ExtResource( 3 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Floor3" type="TextureRect" parent="."]
-anchor_top = 0.699
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 638.705
-margin_top = -219.549
-margin_right = -86.295
-margin_bottom = -363.149
-texture = ExtResource( 3 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Ground" parent="." instance=ExtResource( 3 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 413.003, 395.272 )
+position = Vector2( 379.179, 547.859 )
+
+[node name="Turret" parent="." instance=ExtResource( 5 )]
+position = Vector2( 107.878, 253.214 )
