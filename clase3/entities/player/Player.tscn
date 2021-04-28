@@ -1,56 +1,30 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://entities/player/Arm.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/player.png" type="Texture" id=2]
 [ext_resource path="res://assets/textures/cannon.png" type="Texture" id=3]
 [ext_resource path="res://entities/player/PlayerProjectile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/player/Player.gd" type="Script" id=5]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends Sprite
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 30.5817, 30.5556 )
 
-# A penas inicia el nodo setea la variable con el nodo hijo
-onready var arm = $Arm
-var speed = 200 #Pixeles
-
-func initialize(projectile_container):
-	arm.container = projectile_container
-
-
-func _physics_process(delta):
-	# Manera básica
-#	var direction:int = 0
-#	if Input.is_action_pressed(\"move_left\"):
-#		direction = -1
-#	elif Input.is_action_pressed(\"move_right\"):
-#		direction = 1
-	
-	#position.x += direction * speed * delta
-	
-	#var mouse_position: Vector2 = get_global_mouse_position()
-	var mouse_position: Vector2 = get_local_mouse_position()
-	arm.rotation = mouse_position.normalized().angle()
-	if Input.is_action_just_pressed(\"fire\"):
-		arm.fire()
-	
-	# Manera optimizada
-	var direction_optimized:int = int(Input.is_action_pressed(\"move_right\")) - int(Input.is_action_pressed(\"move_left\"))
-	
-	position.x += direction_optimized * speed * delta
-
-
-"
-
-[node name="Player" type="Sprite"]
-texture = ExtResource( 2 )
-script = SubResource( 1 )
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Arm" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Arm" type="Sprite" parent="Sprite"]
 texture = ExtResource( 3 )
 script = ExtResource( 1 )
 projectile_scene = ExtResource( 4 )
 
-[node name="FirePosition" type="Position2D" parent="Arm"]
+[node name="FirePosition" type="Position2D" parent="Sprite/Arm"]
 position = Vector2( 17.4617, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
