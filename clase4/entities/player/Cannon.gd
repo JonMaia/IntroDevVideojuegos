@@ -1,9 +1,7 @@
 extends Sprite
 
 onready var cannon_tip = $CannonTip
-
 export (PackedScene) var projectile_scene:PackedScene
-
 var projectile_container
 
 func fire():
