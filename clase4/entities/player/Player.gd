@@ -43,6 +43,8 @@ func apply_movement_vertical():
 		velocity.y -= jump_speed
 
 func cannon_fire():
+	var mouse_position: Vector2 = get_local_mouse_position()
+	cannon.rotation = mouse_position.normalized().angle()
 	if Input.is_action_just_pressed("fire_cannon"):
 		if projectile_container == null:
 			projectile_container = get_parent()
