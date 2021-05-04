@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/textures/background.png" type="Texture" id=2]
@@ -6,7 +6,62 @@
 [ext_resource path="res://entities/enemies/Turret.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entities/enemies/TurretsSpawner.gd" type="Script" id=5]
 [ext_resource path="res://entities/environments/Floor.tscn" type="PackedScene" id=6]
-[ext_resource path="res://entities/Ball.tscn" type="PackedScene" id=7]
+[ext_resource path="res://entities/environments/Ball.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/textures/gray_square.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/brown_square.png" type="Texture" id=9]
+[ext_resource path="res://entities/environments/Star.tscn" type="PackedScene" id=10]
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 224, 0, 0, 0, 0, 64, 224, 64 )
+
+[sub_resource type="TileSet" id=2]
+0/name = "brown_square.png 0"
+0/texture = ExtResource( 9 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 224, 64 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 4 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="TileSet" id=3]
+0/name = "gray_square.png 0"
+0/texture = ExtResource( 8 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 64, 64 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 5 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 5 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
 
 [sub_resource type="LineShape2D" id=1]
 
@@ -16,24 +71,38 @@ script = ExtResource( 3 )
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1310.0
+margin_right = 2200.0
+margin_bottom = 400.0
 texture = ExtResource( 2 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 409.227, 365.068 )
+[node name="Platforms" type="TileMap" parent="."]
+tile_set = SubResource( 2 )
+show_collision = true
+collision_layer = 3
+collision_mask = 3
+format = 1
+tile_data = PoolIntArray( 262150, 0, 0, 458764, 0, 0, 524289, 0, 0, 655377, 0, 0 )
 
-[node name="Floor" parent="." instance=ExtResource( 6 )]
+[node name="Blocks" type="TileMap" parent="."]
+tile_set = SubResource( 3 )
+format = 1
+tile_data = PoolIntArray( 458776, 0, 0, 524312, 0, 0, 589847, 0, 0, 589848, 0, 0, 589851, 0, 0, 655382, 0, 0, 655383, 0, 0, 655384, 0, 0, 720917, 0, 0, 720918, 0, 0, 720919, 0, 0, 720920, 0, 0, 786452, 0, 0, 786453, 0, 0, 786454, 0, 0, 786455, 0, 0, 786456, 0, 0, 851990, 0, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 403.888, 674.751 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="TurretsSpawner" type="Node" parent="."]
 script = ExtResource( 5 )
 turret_scene = ExtResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2( 1056, 514 )
+position = Vector2( 1056, 919.791 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, 0.594604 )
@@ -41,9 +110,15 @@ scale = Vector2( 40, 1 )
 shape = SubResource( 1 )
 
 [node name="Respawn" type="Position2D" parent="."]
-position = Vector2( 225.36, 359.904 )
+position = Vector2( 390.88, 677.596 )
 
 [node name="Ball" parent="." instance=ExtResource( 7 )]
-position = Vector2( 659.255, 179.797 )
+position = Vector2( 653.916, 179.797 )
+
+[node name="Star" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1982.93, 342.744 )
+
+[node name="Floor" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1055, 919.291 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
