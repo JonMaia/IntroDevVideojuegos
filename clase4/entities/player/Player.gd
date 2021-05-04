@@ -50,3 +50,7 @@ func cannon_fire():
 			projectile_container = get_parent()
 			cannon.projectile_container = projectile_container
 		cannon.fire()
+
+func win():
+	print("You Win!")
+	self.position = player_respawn.position
